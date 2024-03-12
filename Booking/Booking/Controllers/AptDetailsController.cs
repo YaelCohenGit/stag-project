@@ -1,4 +1,5 @@
 ﻿using BL;
+using Dal.Implementation;
 using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 // these Controllers are in the right place
 namespace Dal.API
 {
+    //הקונטרולר ניגש לסרביס והסרביס ניגש לרפו
+
     [Route("api/[controller]")]
     [ApiController]
     public class AptDetailsController : ControllerBase
@@ -19,11 +22,17 @@ namespace Dal.API
             this.aptDetailsService = aptDetailsService;
         }
 
-        //[HttpGet("getAllAptDetails")]
-        //public List<AptDetails> Get()
-        //{
-        //    return aptDetailsService.GetAllEmployees();
-        //}
+        DBContext dbContext;
+
+        [HttpGet("getAllAptDetails/{id}")]
+        public async Task<AptDetails?> GetAsync(int id)
+        {
+            AptDetailRepo a = new(dbContext);
+            var e = await a.GetSingleAsync(id);
+            return e;
+        }
+
+
         public void Create(string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
         {
             AptDetails aptDetail = new AptDetails(country, city, street, aptStyle, beds, pricePerNight);

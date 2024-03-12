@@ -1,52 +1,89 @@
 ﻿using Dal.API;
 using Dal.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//using Common;
 namespace Dal.Implementation
 {
-    public class OwnersRepo : IOwnersRepo
+    public class OwnersRepo: IOwnersRepo
     {
-
-        //public void Create(string? Tel, string? Email, AptDetails AptDetail)
-        //{
-        //    Owner o = new Owner(Tel, Email, AptDetail);
-        //}
-
-
-        public void Create(Owner item)
+        DBContext context;
+        public OwnersRepo(DBContext context)
         {
-            DBContext.Owners.Add(item);
-            //DBContext.SaveChanges();
+            this.context = context;
+        }
+        public async Task<Owner> AddAsync(Owner entity)
+        {
+            try
+            {
+                context.Owners.Add(entity);
+                context.SaveChanges();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to add a new Owner");
+            }
         }
 
-        public void Updete(Owner owner, string? Tel, string? Email)
+        public async Task<Owner> DeleteAsync(string id)
         {
-            owner.Email = Email;
-            owner.Tel = Tel;
+            Owner c = context.Owners.FirstOrDefault(c => c.OwnerId == id);
+            if (c != null)
+                context.Owners.Remove(c);
+            context.SaveChanges();
+            return c;
         }
 
-        //public void Delete(Owner t)
-        //{
-
-        //}
-
-        public string Read(Owner O)
-        {
-            return O.Tel + " " + O.Email;
-        }
-
-        public string Get(Owner O)
-        {
-            return DBContext.Owners.ToList();
-        }
-
-        public void Create(string? Tel, string? Email, AptDetails AptDetail)
+        public Task<Owner> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
+
+        //public async Task<PagedList<Tourist>> GetAllAsync(BaseQueryParams queryParams)
+        //{
+        //    var queryable = context.Owners.AsQueryable();
+        //    return PagedList<Tourist>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
+        //}
+
+        public async Task<Owner> GetSingleAsync(int id)
+        {
+            try
+            {
+                return await context.Owners.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception($"Error in getting single Owner {id} data");
+            }
+        }
+
+        public async Task<Owner> UpdateAsync(string id, Owner entity)
+        {
+            Owner? AptDetails = context.Owners.FirstOrDefault(c => c.OwnerId == id);
+            if (AptDetails != null)
+            {
+                AptDetails = entity;
+                context.SaveChanges();
+            }
+            return AptDetails;
+        }
+
+        public Task<Owner> UpdateAsync(int id, Owner entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        //Task<PagedList<Owner>> IRepository<Owner>.GetAllAsync(BaseQueryParams queryParams)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

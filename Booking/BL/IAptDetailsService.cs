@@ -8,5 +8,7 @@ namespace BL
 {
     public interface IAptDetailsService //: IService<AptDetails>
     {
+
+
     }
 }

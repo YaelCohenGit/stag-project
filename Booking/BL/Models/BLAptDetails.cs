@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL.Models
 {
-    internal class BLAptDetails
+    public class BLAptDetails
     {
         public string? country { get; set; }
         public string? city { get; set; }

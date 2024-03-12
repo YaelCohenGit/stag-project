@@ -1,7 +1,9 @@
 ﻿using Dal.API;
 using Dal.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,48 +12,65 @@ namespace Dal.Implementation
 {
     public class AptDetailRepo : IAptDetailRepo
     {
+        DBContext context;
+        public AptDetailRepo(DBContext context)
+        {
+            this.context = context;
+        }
 
-        //public void Create(string? country,string? city,string? street, string aptStyle, string? beds, string? pricePerNight)
+        public async Task<AptDetails> AddAsync(AptDetails entity)
+        {
+            try
+            {
+                context.AptDetails.Add(entity);
+                context.SaveChanges();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to add a new AptDetails");
+            }
+        }
+
+        //public async Task<PagedList<AptDetails>> GetAllAsync(BaseQueryParams queryParams)
         //{
-        //    AptDetails aptDetail = new AptDetails(country, city, street, aptStyle, beds, pricePerNight);
+        //    var queryable = context.AptDetails.AsQueryable();
+        //    return PagedList<AptDetails>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
         //}
-
-
-        public void Create(AptDetails item)
+        public async Task<AptDetails?> GetSingleAsync(int id)
         {
-            DBContext.AptDetails.Add(item);
-            //DBContext.SaveChanges();
+            try
+            {
+                var e = await context?.AptDetails?.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
+                return e == null ? null : e;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception($"Error in getting single AptDetails {id} data");
+            }
         }
 
-
-        public void Updete(AptDetails aptDetail, string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
+        public async Task<AptDetails> DeleteAsync(int id)
         {
-            aptDetail.Country = country;
-            aptDetail.City = city;
-            aptDetail.Street = street;
-            aptDetail.AptStyle = aptStyle;
-            aptDetail.Beds = beds;
-            aptDetail.PricePerNight = pricePerNight;
+            AptDetails c = context.AptDetails.FirstOrDefault(c => c.AptDetailsId == id);
+            if (c != null)
+                context.AptDetails.Remove(c);
+            context.SaveChanges();
+            return c;
         }
 
-        //public void Delete(Owner t)
-        //{
-
-        //}
-
-        //public string Read(AptDetails a)
-        //{
-        //    return a.Country + " " + a.City + " "+ a.Street + " " + a.AptStyle + " " + a.Beds + " " + a.PricePerNight + " ";
-        //}
-        public string Read(AptDetails a)
+        public async Task<AptDetails> UpdateAsync(int id, AptDetails entity)
         {
-            return "";
-            //DBContext.AptDetails.ToList(a.Country, a.City);
+            AptDetails? AptDetails = context.AptDetails.FirstOrDefault(c => c.AptDetailsId == id);
+            if (AptDetails != null)
+            {
+                AptDetails = entity;
+                context.SaveChanges();
+            }
+            return AptDetails;
         }
 
-        public void Create(string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
