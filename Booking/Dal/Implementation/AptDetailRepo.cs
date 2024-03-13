@@ -1,15 +1,11 @@
 ﻿using Dal.API;
 using Dal.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dal.Implementation
 {
+
     public class AptDetailRepo : IAptDetailRepo
     {
         DBContext context;
@@ -42,8 +38,10 @@ namespace Dal.Implementation
         {
             try
             {
+                //return new AptDetails("1","2","3","4","5","6");
+
                 var e = await context?.AptDetails?.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
-                return e == null ? null : e;
+                return e;
             }
             catch (Exception ex)
             {

@@ -1,3 +1,4 @@
+using BL;
 using Dal.Models;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<DBContext>();
+builder.Services.AddScoped<BLManager>();
 
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("AcademyDB");  //from appsettings.json

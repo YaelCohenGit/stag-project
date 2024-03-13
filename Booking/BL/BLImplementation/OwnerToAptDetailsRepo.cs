@@ -1,4 +1,5 @@
 ﻿using Dal;
+using Dal.API;
 using Dal.Implementation;
 using Dal.Models;
 using System;
@@ -11,8 +12,8 @@ namespace BL.BLImplementation
 {
     public class OwnerToAptDetailsRepo
     {
-        OwnersRepo ownersRepo;
-        AptDetailRepo AptDetail;  
+        IOwnersRepo ownersRepo;
+        IAptDetailRepo AptDetail;  
         public OwnerToAptDetailsRepo(DalManager dalManager)
         {
             this.ownersRepo = dalManager.owners;
