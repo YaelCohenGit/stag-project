@@ -38,10 +38,10 @@ namespace Dal.Implementation
         {
             try
             {
-                //return new AptDetails("1","2","3","4","5","6");
+                return new AptDetails("1","2","3","4","5","6");
 
                 var e = await context?.AptDetails?.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
-                return e;
+                //return e;
             }
             catch (Exception ex)
             {
