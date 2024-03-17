@@ -1,4 +1,5 @@
-﻿using Dal;
+﻿using BL.Models;
+using Dal;
 using Dal.API;
 using Dal.Implementation;
 using Dal.Models;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 
 namespace BL
 {
-    public class AptDetailsService : IAptDetailsService
+    public class AptDetailsService //: IAptDetailsService
     {
         IAptDetailRepo _aptDetailRepo;
         public AptDetailsService(DalManager context)
@@ -26,5 +27,6 @@ namespace BL
                 throw new Exception($"Error in getting single AptDetails {id} data");
             }
         }
+
     }
 }

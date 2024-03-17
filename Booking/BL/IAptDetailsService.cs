@@ -1,4 +1,5 @@
-﻿using Dal.Models;
+﻿using BL.Models;
+using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace BL
 {
     public interface IAptDetailsService //: IService<AptDetails>
     {
-        public Task<AptDetails?> GetSingleAsync(int id);
+        public Task<BLAptDetails?> GetSingleAsync(int id);
 
     }
 }

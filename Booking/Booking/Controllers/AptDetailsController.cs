@@ -1,4 +1,5 @@
 ﻿using BL;
+using BL.Models;
 using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
 // these Controllers are in the right place
@@ -19,7 +20,7 @@ public class AptDetailsController : ControllerBase
     //DBContext dbContext;
 
     [HttpGet("getAllAptDetails/{id}")]
-    public async Task<AptDetails?> GetAsync(int id)
+    public async Task<BLAptDetails?> GetAsync(int id)
     {
         return await aptDetailsService.GetSingleAsync(id);
         //AptDetailRepo a = new(dbContext);

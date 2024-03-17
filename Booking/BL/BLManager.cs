@@ -14,12 +14,17 @@ public class BLManager
     {
         ServiceCollection services = new();
         services.AddScoped<DalManager>();
+
         services.AddScoped<OwnerToAptDetailsRepo>();
-        services.AddScoped<IAptDetailsService,AptDetailsService>();
+        services.AddScoped<AptDetailsService>();
 
         ServiceProvider servicesProvider = services.BuildServiceProvider();
 
-        ownerToAptDetailsRepo = servicesProvider.GetRequiredService<OwnerToAptDetailsRepo>();
-        aptDetailsService = servicesProvider.GetRequiredService<IAptDetailsService>();
+        ownerToAptDetailsRepo = (OwnerToAptDetailsRepo)servicesProvider.GetRequiredService<IOwnersService>();
+        //aptDetailsService =  servicesProvider.GetRequiredService<IAptDetailsService>();
+
+
+        
+
     }
 }
