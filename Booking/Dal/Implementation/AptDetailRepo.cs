@@ -35,20 +35,24 @@ namespace Dal.Implementation
         //    var queryable = context.AptDetails.AsQueryable();
         //    return PagedList<AptDetails>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
         //}
-        public async Task<AptDetails?> GetSingleAsync(int id)
+        public async Task<AptDetails> GetSingleAsync(int id)
         {
+            AptDetails? returnValue = null;
+
             try
             {
                 //return new AptDetails("1","2","3","4","5","6");
 
-                var e = await context.AptDetails.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
-                return e;
+                returnValue = await context.AptDetails.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
                 throw new Exception($"Error in getting single AptDetails {id} data");
             }
+
+            return returnValue;
         }
 
         public async Task<AptDetails> DeleteAsync(int id)

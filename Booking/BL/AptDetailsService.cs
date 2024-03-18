@@ -7,19 +7,28 @@ using System.Diagnostics;
 
 namespace BL
 {
-    public class AptDetailsService //: IAptDetailsService
+    public class AptDetailsService : IAptDetailsService
     {
         IAptDetailRepo _aptDetailRepo;
         public AptDetailsService(DalManager context)
         {
             this._aptDetailRepo = context.AptDetail;
         }
-        public async Task<AptDetails?> GetSingleAsync(int id)
+
+        public async Task<BLAptDetails?> GetSingleAsync(int id)
         {
             try
             {
                 var e = await _aptDetailRepo.GetSingleAsync(id);
-                return e;
+                
+                BLAptDetails bLAptDetails = new BLAptDetails()// אפשר גם בסיטור
+                {
+                    city = e.City,
+                    country = e.Country,
+                    pricePerNight = e.PricePerNight,
+                };
+
+                return bLAptDetails;
             }
             catch (Exception ex)
             {

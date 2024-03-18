@@ -20,4 +20,8 @@ public partial class Owner
         this.Email = Email; 
         this.AptDetails = AptDetails;   
     }
+    public Owner()
+    {
+
+    }
 }

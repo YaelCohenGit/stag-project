@@ -6,7 +6,6 @@ namespace BL;
 
 public class BLManager
 {
-
     public OwnerToAptDetailsRepo ownerToAptDetailsRepo { get; }
     public IAptDetailsService aptDetailsService { get; }
 
@@ -20,11 +19,12 @@ public class BLManager
 
         ServiceProvider servicesProvider = services.BuildServiceProvider();
 
-        ownerToAptDetailsRepo = (OwnerToAptDetailsRepo)servicesProvider.GetRequiredService<IOwnersService>();
-        //aptDetailsService =  servicesProvider.GetRequiredService<IAptDetailsService>();
+        //ownerToAptDetailsRepo = (OwnerToAptDetailsRepo)servicesProvider.GetRequiredService<IOwnersService>();
+        aptDetailsService =  servicesProvider.GetRequiredService<IAptDetailsService>();
 
 
-        
+        //ownerToAptDetailsRepo = servicesProvider.GetRequiredService<OwnerToAptDetailsRepo>();
+        //aptDetailsService = servicesProvider.GetRequiredService<IAptDetailsService>();
 
     }
 }
