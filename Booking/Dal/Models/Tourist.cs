@@ -12,13 +12,4 @@ public partial class Tourist
     public string? Email { get; set; }
 
     public virtual ICollection<WantedApt> WantedApts { get; set; } = new List<WantedApt>();
-    public Tourist(string? Email, string? Tel)
-    {
-        this.Email = Email;
-        this.Tel = Tel;
-    }
-    public Tourist()
-    {
-
-    }
 }

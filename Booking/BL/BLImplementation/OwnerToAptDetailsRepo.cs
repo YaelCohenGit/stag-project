@@ -22,7 +22,7 @@ namespace BL.BLImplementation
 
         public async Task<Owner> AddOwner(Owner owner)
         {
-            Owner newOwner = new Owner(owner.Tel, owner.Email ,owner.AptDetails);
+            Owner newOwner = new Owner() { Tel = owner.Tel, Email = owner.Email, AptDetails = owner.AptDetails };
             await ownersRepo.AddAsync(newOwner);
             return newOwner;
         }

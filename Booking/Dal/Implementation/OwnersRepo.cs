@@ -32,7 +32,7 @@ namespace Dal.Implementation
             }
         }
 
-        public async Task<Owner> DeleteAsync(string id)
+        public async Task<Owner> DeleteAsync(int id)
         {
             Owner c = context.Owners.FirstOrDefault(c => c.OwnerId == id);
             if (c != null)
@@ -41,10 +41,6 @@ namespace Dal.Implementation
             return c;
         }
 
-        public Task<Owner> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         //public async Task<PagedList<Tourist>> GetAllAsync(BaseQueryParams queryParams)
         //{
@@ -65,7 +61,7 @@ namespace Dal.Implementation
             }
         }
 
-        public async Task<Owner> UpdateAsync(string id, Owner entity)
+        public async Task<Owner> UpdateAsync(int id, Owner entity)
         {
             Owner? AptDetails = context.Owners.FirstOrDefault(c => c.OwnerId == id);
             if (AptDetails != null)
@@ -76,10 +72,6 @@ namespace Dal.Implementation
             return AptDetails;
         }
 
-        public Task<Owner> UpdateAsync(int id, Owner entity)
-        {
-            throw new NotImplementedException();
-        }
 
         //Task<PagedList<Owner>> IRepository<Owner>.GetAllAsync(BaseQueryParams queryParams)
         //{

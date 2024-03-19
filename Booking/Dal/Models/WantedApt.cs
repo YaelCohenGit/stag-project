@@ -18,5 +18,4 @@ public partial class WantedApt
     public int WantedMaxPrice { get; set; }
 
     public virtual Tourist Tourist { get; set; } = null!;
-
 }

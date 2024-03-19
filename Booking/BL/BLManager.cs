@@ -1,4 +1,5 @@
-﻿using BL.BLImplementation;
+﻿using BL.API;
+using BL.BLImplementation;
 using Dal;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,8 +7,8 @@ namespace BL;
 
 public class BLManager
 {
-    public OwnerToAptDetailsRepo ownerToAptDetailsRepo { get; }
-    public IAptDetailsService aptDetailsService { get; }
+    /*public OwnerToAptDetailsRepo ownerToAptDetailsRepo { get; }*/
+    public IAptDetailsService _aptDetailsService { get; }
 
     public BLManager()
     {
@@ -15,16 +16,13 @@ public class BLManager
         services.AddScoped<DalManager>();
 
         services.AddScoped<OwnerToAptDetailsRepo>();
-        services.AddScoped<AptDetailsService>();
+      /*  services.AddScoped<AptDetailsService>();*/
 
         ServiceProvider servicesProvider = services.BuildServiceProvider();
 
         //ownerToAptDetailsRepo = (OwnerToAptDetailsRepo)servicesProvider.GetRequiredService<IOwnersService>();
-        aptDetailsService =  servicesProvider.GetRequiredService<IAptDetailsService>();
-
-
+        _aptDetailsService = servicesProvider.GetService<AptDetailsService>();
         //ownerToAptDetailsRepo = servicesProvider.GetRequiredService<OwnerToAptDetailsRepo>();
-        //aptDetailsService = servicesProvider.GetRequiredService<IAptDetailsService>();
 
     }
 }

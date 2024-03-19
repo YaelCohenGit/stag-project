@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace BL.API
 {
-    public interface IAptDetailsService //: IService<AptDetails>
+    public interface IAptDetailsService : IService<BLAptDetails>
     {
         public Task<BLAptDetails?> GetSingleAsync(int id);
 

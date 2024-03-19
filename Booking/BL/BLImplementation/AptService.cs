@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.API;
 
-namespace BL
+namespace BL.BLImplementation
 {
-    internal interface IOwnersService //: IService<Owner>
+    internal class AptService : IWantedAptsService
     {
+
     }
 }

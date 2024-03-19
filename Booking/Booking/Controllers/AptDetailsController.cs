@@ -1,4 +1,5 @@
 ﻿using BL;
+using BL.API;
 using BL.Models;
 //using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ public class AptDetailsController : ControllerBase
     IAptDetailsService aptDetailsService;
     public AptDetailsController(BLManager blManager)
     {
-        aptDetailsService = blManager.aptDetailsService;
+        aptDetailsService = blManager._aptDetailsService;
     }
 
     //DBContext dbContext;

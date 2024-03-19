@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL.API
 {
-    public interface IRepository<T>
+    internal interface IOwnersService// : IService<Owner>
     {
-        
     }
 }

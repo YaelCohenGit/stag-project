@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace BL.API
 {
     public interface IService<T>
     {
@@ -12,7 +12,7 @@ namespace BL
 
         Task<T> GetSingleAsync(int id);
 
-        Task<string> AddAsync(T objectToUpdate);
+        Task<T> AddAsync(T objectToUpdate);
 
         Task<bool> UpdateAsync(T objectToUpdate);
 
