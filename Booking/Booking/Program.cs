@@ -7,6 +7,7 @@ using System.Security.Claims;
 using BL;
 using BL.API;
 using BL.BLImplementation;
+using Dal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,33 +17,30 @@ builder.Services.AddScoped<BLManager>();
 builder.Services.AddControllers();
 builder.Services.AddServices();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORSPolicy",
+        builder =>
+        {
+            builder
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowAnyOrigin();
+        });
+});
 
+#region
 /*builder.Services.AddSwaggerGen();*/
 
 /*var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 
 builder.Services.AddDbContext<DBContext>();*/
-
-
-
-
-
-
-
-
-
-
+#endregion
 DBActions actions = new DBActions(builder.Configuration); 
 var connString = actions.GetConnectionString("AcademyDB");
 //from appsettings.json;
 builder.Services.AddDbContext<DBContext>(opt => opt.UseSqlServer(connString));
-//builder.Services.AddScoped<IUniversityRepo, UniversityRepo>();
-//builder.Services.AddScoped<ICountryRepo, CountryRepo>();
-//builder.Services.AddScoped<IUniversityRankingRepo, UniversityRankingRepo>();
-builder.Services.AddSingleton<IAptDetailsService, AptDetailsService>();
-
 
 var app = builder.Build();
 
@@ -52,9 +50,8 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }*/
 
+app.UseCors("CORSPolicy");
 app.MapControllers();
-app.MapGet("/", () => "Hello World!");
-
 
 app.Run();
 

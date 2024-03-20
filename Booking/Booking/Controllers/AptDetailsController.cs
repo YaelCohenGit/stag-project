@@ -50,4 +50,6 @@ public class AptDetailsController : ControllerBase
     //{
     //    return a.Country + " " + a.City + " " + a.Street + " " + a.AptStyle + " " + a.Beds + " " + a.PricePerNight + " ";
     //}
+
+    //String.Format("{0} {1} {2} {3} {4} {5} ", a.Country, a.City, a.Street, a.AptStyle, a.Beds, a.PricePerNight);
 }

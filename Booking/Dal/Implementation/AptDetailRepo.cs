@@ -12,7 +12,6 @@ namespace Dal.Implementation
         public AptDetailRepo(DBContext context)
         {
             this.context = context;
-            int a = 1;
         }
 
         public async Task<AptDetails> AddAsync(AptDetails entity)
@@ -42,9 +41,7 @@ namespace Dal.Implementation
             try
             {
                 //return new AptDetails("1","2","3","4","5","6");
-
-                returnValue = await context.AptDetails.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
-                
+                returnValue = await context.AptDetails.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();              
             }
             catch (Exception ex)
             {

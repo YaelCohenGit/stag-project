@@ -7,10 +7,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection collection)
     {
-        
-        collection.AddSingleton<IAptDetailsService, AptDetailsService>();
-        //collection.AddAutoMapper(typeof(AptDetailsProfile));
 
+        collection.AddScoped<IAptDetailsService, AptDetailsService>();
+        //collection.AddAutoMapper(typeof(AptDetailsProfile));
         //collection.AddRepositories(config);
         collection.AddRepositories();
         return collection;

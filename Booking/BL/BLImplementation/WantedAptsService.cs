@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.API;
 
 namespace BL.BLImplementation
 {
-    internal class WantedAptsService
+    public class WantedAptsService : IWantedAptsService
     {
     }
 }
