@@ -7,7 +7,7 @@ namespace Dal
 {
     public class DalManager
     {
-        public OwnersRepo owners { get; }
+        public OwnersRepo Owners { get; }
         public AptDetailRepo AptDetail { get; }
         public TouristsRepo Tourists { get; }
         public DalManager()
@@ -26,7 +26,7 @@ namespace Dal
 
             AptDetail = (AptDetailRepo)serviceProvider.GetRequiredService<IAptDetailRepo>();
             Tourists = (TouristsRepo)serviceProvider.GetRequiredService<ITouristsRepo>();
-            owners = (OwnersRepo)serviceProvider.GetRequiredService<IOwnersRepo>();
+            Owners = (OwnersRepo)serviceProvider.GetRequiredService<IOwnersRepo>();
         }
 
     }

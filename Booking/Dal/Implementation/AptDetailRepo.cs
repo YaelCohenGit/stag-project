@@ -13,6 +13,10 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
+        public AptDetailRepo()
+        {
+            this.context = context;
+        }
 
         public async Task<AptDetails> AddAsync(AptDetails entity)
         {

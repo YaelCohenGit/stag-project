@@ -16,7 +16,7 @@ namespace BL.BLImplementation
         IAptDetailRepo AptDetail;  
         public OwnerToAptDetailsRepo(DalManager dalManager)
         {
-            this.ownersRepo = dalManager.owners;
+            this.ownersRepo = dalManager.Owners;
             this.AptDetail = dalManager.AptDetail;
         }
 

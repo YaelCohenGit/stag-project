@@ -11,7 +11,7 @@ namespace BL.API
 {
     public interface IAptDetailsService : IService<BLAptDetails>
     {
-        public Task<BLAptDetails?> GetSingleAsync(int id);
+        public Task<BLAptDetails?> GetById(int id);
 
     }
 }

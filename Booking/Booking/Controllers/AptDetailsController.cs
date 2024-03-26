@@ -23,7 +23,7 @@ public class AptDetailsController : ControllerBase
     [HttpGet("getAllAptDetails/{id}")]
     public async Task<BLAptDetails?> GetAsync(int id)
     {
-        return await aptDetailsService.GetSingleAsync(id);
+        return await aptDetailsService.GetById(id);
     }
 
 

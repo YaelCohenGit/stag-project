@@ -10,7 +10,7 @@ namespace BL.API
     {
         Task<List<T>> GetAllAsync();
 
-        Task<T> GetSingleAsync(int id);
+        Task<T> GetById(int id);
 
         Task<T> AddAsync(T objectToUpdate);
 
