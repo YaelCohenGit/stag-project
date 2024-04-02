@@ -8,7 +8,7 @@ namespace Dal
     public class DalManager
     {
         public OwnersRepo Owners { get; }
-        public AptDetailRepo AptDetail { get; }
+        public AptDetailsRepo AptDetail { get; }
         public TouristsRepo Tourists { get; }
         public DalManager()
         {
@@ -18,13 +18,13 @@ namespace Dal
             services.AddDbContext<DBContext>();
 
             services.AddScoped<IOwnersRepo, OwnersRepo>();
-            services.AddScoped<IAptDetailRepo, AptDetailRepo>();
+            services.AddScoped<IAptDetailRepo, AptDetailsRepo>();
             services.AddScoped<ITouristsRepo, TouristsRepo>();
 
             // הגדרת מנהל למחלקות השרות שנקרא פרווידר
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            AptDetail = (AptDetailRepo)serviceProvider.GetRequiredService<IAptDetailRepo>();
+            AptDetail = (AptDetailsRepo)serviceProvider.GetRequiredService<IAptDetailRepo>();
             Tourists = (TouristsRepo)serviceProvider.GetRequiredService<ITouristsRepo>();
             Owners = (OwnersRepo)serviceProvider.GetRequiredService<IOwnersRepo>();
         }

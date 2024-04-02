@@ -26,6 +26,18 @@ public class AptDetailsController : ControllerBase
         return await aptDetailsService.GetById(id);
     }
 
+    //[HttpGet]
+    //public async Task<List<FlightDTO>> GetAllAsync()
+    //{
+    //    return await _flightService.GetAllAsync();
+    //}
+
+    //[HttpGet("getFlightByFlightCode")]
+    //public async Task<FlightDTO> GetFlightByIdAsync(string flightCode)
+    //{
+    //    return await _flightService.GetSingleAsync(flightCode);
+    //}
+
 
     //public void Create(string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
     //{

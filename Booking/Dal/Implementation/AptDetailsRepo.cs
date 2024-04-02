@@ -6,16 +6,17 @@ using System.Diagnostics;
 namespace Dal.Implementation
 {
 
-    public class AptDetailRepo : IAptDetailRepo
+    public class AptDetailsRepo : IAptDetailRepo
     {
         DBContext context;
-        public AptDetailRepo(DBContext context)
+     /*   public AptDetailsRepo(DBContext context)
         {
             this.context = context;
-        }
-        public AptDetailRepo()
+        }*/
+        public AptDetailsRepo()
         {
-            this.context = context;
+            /*this.context = context;*/
+            this.context = new DBContext();
         }
 
         public async Task<AptDetails> AddAsync(AptDetails entity)
@@ -55,6 +56,7 @@ namespace Dal.Implementation
 
             return returnValue;
         }
+
 
         public async Task<AptDetails> DeleteAsync(int id)
         {

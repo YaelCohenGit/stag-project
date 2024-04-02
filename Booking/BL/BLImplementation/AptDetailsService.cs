@@ -14,10 +14,10 @@ namespace BL.BLImplementation
     public class AptDetailsService : IAptDetailsService
     {
         IAptDetailRepo _aptDetailRepo;
-        IMapper _mapper;
-        public AptDetailsService(IAptDetailRepo aptDetailRepo)
+        IMapper? _mapper;
+        public AptDetailsService()//(DalManager  aptDetailRepo)
         {
-            _aptDetailRepo = aptDetailRepo;
+            _aptDetailRepo = new AptDetailsRepo();// aptDetailRepo.AptDetail;
         }
 
         public async Task<BLAptDetails?> GetById(int id)
@@ -25,8 +25,13 @@ namespace BL.BLImplementation
             //Task<AptDetails> user = _aptDetailRepo.GetSingleAsync(id);
             //AptDetailRepo newAptDetailRepo = new AptDetailRepo();
 
-            return _mapper.Map<BLAptDetails>(await _aptDetailRepo.GetSingleAsync(id));
+            return _mapper?.Map<BLAptDetails>(await _aptDetailRepo.GetSingleAsync(id));
         }
+
+        //public async Task<FlightDTO> GetSingleAsync(string flightCode)
+        //{
+        //    return _mapper.Map<FlightDTO>(await _flightRepo.GetSingleAsync(flightCode));
+        //}
 
         //public UserBl GetById(int id)
         //{
