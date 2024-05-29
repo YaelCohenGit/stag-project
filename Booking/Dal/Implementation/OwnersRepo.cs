@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using Common;
 namespace Dal.Implementation
 {
     public class OwnersRepo: IOwnersRepo
@@ -17,13 +16,13 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
-        public async Task<Owner> AddAsync(Owner entity)
+        public Owner Add(Owner owner)
         {
             try
             {
-                context.Owners.Add(entity);
+                context.Owners.Add(owner);
                 context.SaveChanges();
-                return entity;
+                return owner;
             }
             catch (Exception ex)
             {
@@ -32,50 +31,54 @@ namespace Dal.Implementation
             }
         }
 
-        public async Task<Owner> DeleteAsync(int id)
-        {
-            Owner c = context.Owners.FirstOrDefault(c => c.OwnerId == id);
-            if (c != null)
-                context.Owners.Remove(c);
-            context.SaveChanges();
-            return c;
-        }
-
-
-        //public async Task<PagedList<Tourist>> GetAllAsync(BaseQueryParams queryParams)
-        //{
-        //    var queryable = context.Owners.AsQueryable();
-        //    return PagedList<Tourist>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
-        //}
-
-        public async Task<Owner> GetSingleAsync(int id)
+        public Owner Delete(int id)
         {
             try
             {
-                return await context.Owners.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();
+                var ownerToDelete = context.Owners.Where(owner => owner.OwnerId == id).FirstOrDefault();
+                context.Owners.Remove(ownerToDelete);
+                context.SaveChanges();
+                return ownerToDelete;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception($"Error in getting single Owner {id} data");
+                throw new Exception($"Error in deleting Gown {id} data");
             }
         }
 
-        public async Task<Owner> UpdateAsync(int id, Owner entity)
+
+        public Owner GetById(int id)
         {
-            Owner? AptDetails = context.Owners.FirstOrDefault(c => c.OwnerId == id);
-            if (AptDetails != null)
+            try
             {
-                AptDetails = entity;
-                context.SaveChanges();
+                return context.Owners.Where(owner => owner.OwnerId == id).FirstOrDefault();
             }
-            return AptDetails;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception($"Error in getting single Gown {id} data");
+            }
+        }
+
+        public List<Owner> GetAll()
+        {
+            return context.Owners.ToList();
         }
 
 
-        //Task<PagedList<Owner>> IRepository<Owner>.GetAllAsync(BaseQueryParams queryParams)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public Owner Update(Owner owner)
+        {
+            foreach (Owner o in context.Owners.ToList())
+            {
+                if (o.OwnerId == owner.OwnerId)
+                {
+                    o.Tel = owner.Tel;
+                    break;
+                }
+            }
+            context.SaveChanges();
+            return owner;
+        }
     }
 }

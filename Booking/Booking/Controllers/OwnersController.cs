@@ -7,6 +7,7 @@ namespace Booking.Controllers
     [ApiController]
     public class OwnersController : ControllerBase
     {
+        
         public void Create(string? Tel, string? Email, int AptDetail)
         {
             Owner o = new Owner() { Tel = Tel, Email = Email, AptDetailsId = AptDetail };

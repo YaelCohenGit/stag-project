@@ -37,10 +37,9 @@ var configuration = provider.GetRequiredService<IConfiguration>();
 
 builder.Services.AddDbContext<DBContext>();*/
 #endregion
-DBActions actions = new DBActions(builder.Configuration); 
-var connString = actions.GetConnectionString("AcademyDB");
-//from appsettings.json;
-builder.Services.AddDbContext<DBContext>(opt => opt.UseSqlServer(connString));
+//DBActions actions = new DBActions(builder.Configuration); 
+//var connString = actions.GetConnectionString("AcademyDB");
+//builder.Services.AddDbContext<DBContext>(opt => opt.UseSqlServer(connString));
 
 var app = builder.Build();
 
