@@ -25,7 +25,7 @@ namespace BL.BLImplementation
             //Task<AptDetails> user = _aptDetailRepo.GetSingleAsync(id);
             //AptDetailRepo newAptDetailRepo = new AptDetailRepo();
 
-            return _mapper?.Map<BLAptDetails>(await _aptDetailRepo.GetSingleAsync(id));
+            return _mapper?.Map<BLAptDetails>( _aptDetailRepo.GetById(id));
         }
 
         //public async Task<FlightDTO> GetSingleAsync(string flightCode)

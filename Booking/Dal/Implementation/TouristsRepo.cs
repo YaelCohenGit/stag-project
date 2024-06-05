@@ -18,6 +18,12 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
+
+        public Tourist Add(Tourist owner)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Tourist> AddAsync(Tourist entity)
         {
             try
@@ -33,6 +39,10 @@ namespace Dal.Implementation
             }
         }
 
+        public Tourist Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<Tourist> DeleteAsync(int id)
         {
@@ -42,6 +52,17 @@ namespace Dal.Implementation
             context.SaveChanges();
             return t;
         }
+
+        public List<Tourist> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tourist GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         //public async Task<PagedList<Tourist>> IRepository<Tourist>.GetAllAsync(BaseQueryParams queryParams)
         //{
         //    var queryable = context.Tourists.AsQueryable();
@@ -59,6 +80,11 @@ namespace Dal.Implementation
                 Debug.WriteLine(ex.ToString());
                 throw new Exception($"Error in getting single Tourist {id} data");
             }
+        }
+
+        public Tourist Update(Tourist owner)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Tourist> UpdateAsync(int id, Tourist entity)

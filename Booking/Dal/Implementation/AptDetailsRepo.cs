@@ -15,6 +15,9 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
+        public AptDetailsRepo()
+        {
+        }
         public Owner Add(Owner owner)
         {
             try
@@ -78,6 +81,31 @@ namespace Dal.Implementation
             }
             context.SaveChanges();
             return owner;
+        }
+
+        List<AptDetail> IAptDetailRepo.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        AptDetail IAptDetailRepo.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AptDetail Add(AptDetail owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AptDetail Update(AptDetail owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        AptDetail IAptDetailRepo.Delete(int id)
+        {
+            throw new NotImplementedException();
         }
 
 
