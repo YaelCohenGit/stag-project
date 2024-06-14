@@ -8,64 +8,64 @@ namespace Dal.Implementation
 
     public class AptDetailsRepo : IAptDetailRepo
     {
-
-
         DBContext context;
         public AptDetailsRepo(DBContext context)
         {
             this.context = context;
         }
-        public AptDetailsRepo()
+        /*public AptDetailsRepo()
         {
-        }
-        public Owner Add(Owner owner)
+        }*/
+        public AptDetail Add(AptDetail aptDetail)
         {
             try
             {
-                context.Owners.Add(owner);
+                context.AptDetails.Add(aptDetail);
                 context.SaveChanges();
-                return owner;
+                return aptDetail;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to add a new Owner");
+                throw new Exception("Failed to add a new AptDetail");
             }
         }
 
-        public Owner Delete(int id)
+        public AptDetail Delete(int id)
         {
             try
             {
-                var ownerToDelete = context.Owners.Where(owner => owner.OwnerId == id).FirstOrDefault();
-                context.Owners.Remove(ownerToDelete);
+                var aptDetailToDelete = context.Owners.Where(aptDetail => aptDetail.OwnerId == id).FirstOrDefault();
+                context.Owners.Remove(aptDetailToDelete);
                 context.SaveChanges();
-                return ownerToDelete;
+                return aptDetailToDelete;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception($"Error in deleting Gown {id} data");
+                throw new Exception($"Error in deleting");
             }
         }
 
 
-        public Owner GetById(int id)
+        public AptDetail GetById(int id)
         {
             try
             {
-                return context.Owners.Where(owner => owner.OwnerId == id).FirstOrDefault();
+                return context.AptDetails.Where(AptDetail => AptDetail.AptDetailsId == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception($"Error in getting single Gown {id} data");
+                throw new Exception($"Error");
             }
         }
 
-        public List<Owner> GetAll()
+
+        public List<AptDetail> GetAll()
         {
-            return context.Owners.ToList();
+            return context.AptDetails.ToList();
+            /*return context.AptDetails.ToList();*/
         }
 
 

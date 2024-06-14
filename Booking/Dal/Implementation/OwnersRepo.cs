@@ -43,7 +43,7 @@ namespace Dal.Implementation
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                throw new Exception($"Error in deleting Gown {id} data");
+                throw new Exception($"Error in deleting owner {id} data");
             }
         }
 
