@@ -1,62 +1,32 @@
 ﻿using BL;
 using BL.API;
+using BL.BLImplementation;
 using BL.Models;
-//using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
-// these Controllers are in the right place
 namespace Booking.Controllers;
-
-//הקונטרולר ניגש לסרביס והסרביס ניגש לרפו
 
 [Route("api/[controller]")]
 [ApiController]
 public class AptDetailsController : ControllerBase
 {
-    IAptDetailsService aptDetailsService;
+    AptDetailsService aptDetailsService;
     public AptDetailsController(BLManager blManager)
     {
-        aptDetailsService = blManager._aptDetailsService;
+        this.aptDetailsService = blManager.aptDetailsService;
     }
 
-    //DBContext dbContext;
+    [HttpGet]
+    public ActionResult<List<AptDetailsDTO>> GetAll()
+    {
+        return aptDetailsService.GetAll();
+    }
 
-    [HttpGet("getAllAptDetails/{id}")]
-    public async Task<BLAptDetails?> GetAsync(int id)
+    [HttpGet("{id}")]
+    public async Task<AptDetailsDTO?> GetAsync(int id)
     {
         return await aptDetailsService.GetById(id);
     }
 
-    //[HttpGet]
-    //public async Task<List<FlightDTO>> GetAllAsync()
-    //{
-    //    return await _flightService.GetAllAsync();
-    //}
-
-    //[HttpGet("getFlightByFlightCode")]
-    //public async Task<FlightDTO> GetFlightByIdAsync(string flightCode)
-    //{
-    //    return await _flightService.GetSingleAsync(flightCode);
-    //}
-
-
-    //public void Create(string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
-    //{
-    //    AptDetails aptDetail = new AptDetails(country, city, street, aptStyle, beds, pricePerNight);
-    //}
-    //public void Updete(AptDetails aptDetail, string? country, string? city, string? street, string aptStyle, string? beds, string? pricePerNight)
-    //{
-    //    aptDetail.Country = country;
-    //    aptDetail.City = city;
-    //    aptDetail.Street = street;
-    //    aptDetail.AptStyle = aptStyle;
-    //    aptDetail.Beds = beds;
-    //    aptDetail.PricePerNight = pricePerNight;
-    //}
-
-    //public void Delete(Owner t)
-    //{
-
-    //}
 
     //public string Read(BLAptDetails a)
     //{

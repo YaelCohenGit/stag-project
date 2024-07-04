@@ -4,7 +4,6 @@ namespace Dal.API
 {
     public interface IAptDetailRepo
     { 
-
         List<AptDetail> GetAll();
         AptDetail GetById(int id);
         AptDetail Add(AptDetail owner);

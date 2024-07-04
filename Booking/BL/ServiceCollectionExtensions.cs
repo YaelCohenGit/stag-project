@@ -1,6 +1,5 @@
 ﻿using BL.API;
 using BL.BLImplementation;
-using BL.Profile;
 using Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions

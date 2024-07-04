@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BL.API
 {
-    public interface IAptDetailsService : IService<BLAptDetails>
+    public interface IAptDetailsService : IService<AptDetailsDTO>
     {
-        public Task<BLAptDetails?> GetById(int id);
+        public Task<AptDetailsDTO?> GetById(int id);
 
     }
 }

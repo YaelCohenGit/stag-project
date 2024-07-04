@@ -33,7 +33,7 @@ namespace DataAccess
             string str = AppDomain.CurrentDomain.BaseDirectory;
             string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
             string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
-            connStr = string.Format(connStr, twoDirectoriesAboveBin);
+            connStr = string.Format(connStr, twoDirectoriesAboveBin); //fail
             return connStr;
         }
     }

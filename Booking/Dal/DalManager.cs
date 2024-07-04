@@ -1,6 +1,7 @@
 ﻿using Dal.API;
 using Dal.Implementation;
 using Dal.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dal
@@ -10,12 +11,12 @@ namespace Dal
         public OwnersRepo Owners { get; }
         public AptDetailsRepo AptDetail { get; }
         public TouristsRepo Tourists { get; }
-        public DalManager()
+        public DalManager(string connString)
         {
             // כאן הגדרנו אוסף של מחלקות שרות
             ServiceCollection services = new();
             // מוסיפים לאוסף אוביקטים
-            services.AddDbContext<DBContext>();
+            services.AddDbContext<DBContext>((op => op.UseSqlServer(connString)));
 
             services.AddScoped<IOwnersRepo, OwnersRepo>();
             services.AddScoped<IAptDetailRepo, AptDetailsRepo>();
@@ -28,6 +29,5 @@ namespace Dal
             Tourists = (TouristsRepo)serviceProvider.GetRequiredService<ITouristsRepo>();
             Owners = (OwnersRepo)serviceProvider.GetRequiredService<IOwnersRepo>();
         }
-
     }
 }

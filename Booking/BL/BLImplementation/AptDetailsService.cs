@@ -6,27 +6,49 @@ using Dal.API;
 using Dal.Implementation;
 using Dal.Models;
 using System.Diagnostics;
+using System.IO;
 
 namespace BL.BLImplementation
 {
-    //where to inject DalManager ?
-    //do we need to inject the mapper?
     public class AptDetailsService : IAptDetailsService
     {
-        IAptDetailRepo _aptDetailRepo;
-        IMapper? _mapper;
-        public AptDetailsService()//(DalManager  aptDetailRepo)
+        AptDetailsRepo aptDetails;
+        public AptDetailsService(DalManager manager)
         {
-            _aptDetailRepo = new AptDetailsRepo();// aptDetailRepo.AptDetail;
+            this.aptDetails = manager.AptDetail;
+        }
+        public AptDetailsDTO Add(AptDetailsDTO client)
+        {
+            AptDetail c = new AptDetail();
+            c.Country = client.country;
+            c.City = client.city;
+            c.Street = client.street;
+            c.AptStyle= client.aptStyle;
+            c.Beds = client.beds;
+            c.PricePerNight = client.pricePerNight;
+            aptDetails.Add(c);
+            return client;
         }
 
-        public async Task<BLAptDetails?> GetById(int id)
+        public List<AptDetailsDTO> GetAll()
         {
-            //Task<AptDetails> user = _aptDetailRepo.GetSingleAsync(id);
-            //AptDetailRepo newAptDetailRepo = new AptDetailRepo();
-
-            return _mapper?.Map<BLAptDetails>( _aptDetailRepo.GetById(id));
+            List<AptDetail> list = aptDetails.GetAll();
+            List<AptDetailsDTO> result = new List<AptDetailsDTO>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                result.Add(new AptDetailsDTO(list[i].Country, list[i].City, list[i].Street, list[i].AptStyle, list[i].Beds, list[i].PricePerNight));
+            }
+            return result;
         }
+
+
+        //public async Task<AptDetailsDTO?> GetById(int id)
+        //{
+        //    //Task<AptDetails> user = _aptDetailRepo.GetSingleAsync(id);
+        //    //AptDetailRepo newAptDetailRepo = new AptDetailRepo();
+
+        //    return _mapper?.Map<AptDetailsDTO>( _aptDetailRepo.GetById(id));
+        //}
 
         //public async Task<FlightDTO> GetSingleAsync(string flightCode)
         //{
@@ -42,25 +64,25 @@ namespace BL.BLImplementation
         //    newUser.Password = user.Result.Password;
         //    return newUser;
         //}
-        public static BLAptDetails ToDto(AptDetails employee)
-        {
-            if (employee != null)
-            {
-                return new BLAptDetails
-                {
-                    country = employee.Country,
-                    city = employee.City,
-                    street = employee.Street,
-                    aptStyle = employee.AptStyle,
-                    beds = employee.Beds,
-                    pricePerNight = employee.PricePerNight,
-                };
-            }
+        //public static BLAptDetails ToDto(AptDetails employee)
+        //{
+        //    if (employee != null)
+        //    {
+        //        return new BLAptDetails
+        //        {
+        //            country = employee.Country,
+        //            city = employee.City,
+        //            street = employee.Street,
+        //            aptStyle = employee.AptStyle,
+        //            beds = employee.Beds,
+        //            pricePerNight = employee.PricePerNight,
+        //        };
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public async Task<BLAptDetails> AddAsync(BLAptDetails objectToUpdate)
+        public async Task<AptDetailsDTO> AddAsync(AptDetailsDTO objectToUpdate)
         {
             throw new NotImplementedException();
             // return await _aptDetailRepo.AddAsync(Convertion.SimpleAutoMapper<AptDetails, BLAptDetails>(objectToUpdate));
@@ -71,27 +93,32 @@ namespace BL.BLImplementation
             throw new NotImplementedException();
         }
 
-        public Task<List<AptDetails>> GetAllAsync()
+        public Task<List<AptDetail>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(AptDetails objectToUpdate)
+        public Task<bool> UpdateAsync(AptDetail objectToUpdate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(BLAptDetails objectToUpdate)
+        public Task<bool> UpdateAsync(AptDetailsDTO objectToUpdate)
         {
             throw new NotImplementedException();
         }
 
-        Task<List<BLAptDetails>> IService<BLAptDetails>.GetAllAsync()
+        Task<List<AptDetailsDTO>> IService<AptDetailsDTO>.GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<BLAptDetails> GetSingleAsync(int id)
+        public Task<AptDetailsDTO> GetSingleAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AptDetailsDTO?> GetById(int id)
         {
             throw new NotImplementedException();
         }

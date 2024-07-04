@@ -14,7 +14,7 @@ public partial class DBContext : DbContext
         : base(options)
     {
     }
-    public  DbSet<AptDetails> AptDetails { get; set; }
+    public  DbSet<AptDetail> AptDetails { get; set; }
 
     public  DbSet<Owner> Owners { get; set; }
 
@@ -24,7 +24,7 @@ public partial class DBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AptDetails>(entity =>
+        modelBuilder.Entity<AptDetail>(entity =>
         {
             entity.HasKey(e => e.AptDetailsId).HasName("PK__AptDetai__ADC332CFB675253E");
 

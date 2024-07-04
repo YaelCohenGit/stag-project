@@ -20,12 +20,12 @@ namespace BL.BLImplementation
             this.AptDetail = dalManager.AptDetail;
         }
 
-        public async Task<Owner> AddOwner(Owner owner)
-        {
-            Owner newOwner = new Owner() { Tel = owner.Tel, Email = owner.Email, AptDetails = owner.AptDetails };
-            await ownersRepo.AddAsync(newOwner);
-            return newOwner;
-        }
+        //public async Task<Owner> AddOwner(Owner owner)
+        //{
+        //    Owner newOwner = new Owner() { Tel = owner.Tel, Email = owner.Email, AptDetails = owner.AptDetails };
+        //    await ownersRepo.Add(newOwner);
+        //    return newOwner;
+        //}
 
         //public List<Owner> GetOwners(BaseQueryParams queryParams)
         //{
@@ -45,13 +45,13 @@ namespace BL.BLImplementation
 
         public Owner GetById(int id)
         {
-            Task<Owner> Owner = ownersRepo.GetSingleAsync(id);
+            Owner owner = ownersRepo.GetById(id);
             Owner newOwner = new Owner();
             //newOwner.FirstName = Owner.Result.Name.Split(' ')[0];
             //newOwner.LastName = Owner.Result.Name.Split(" ")[1];
             //newOwner.Email = Owner.Result.Email;
             //newOwner.Password = Owner.Result.Password;
-            return newOwner;
+            return owner;
         }
 
     }

@@ -13,9 +13,24 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
-        /*public AptDetailsRepo()
+        public List<AptDetail> GetAll()
         {
-        }*/
+            return context.AptDetails.ToList();
+        }
+        public AptDetail GetById(int id)
+        {
+            try
+            {
+                return context.AptDetails.Where(AptDetail => AptDetail.AptDetailsId == id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception($"Error in getting single AptDetails {id} data");
+            }
+        }
+
+
         public AptDetail Add(AptDetail aptDetail)
         {
             try
@@ -35,8 +50,8 @@ namespace Dal.Implementation
         {
             try
             {
-                var aptDetailToDelete = context.Owners.Where(aptDetail => aptDetail.OwnerId == id).FirstOrDefault();
-                context.Owners.Remove(aptDetailToDelete);
+                var aptDetailToDelete = context.AptDetails.Where(aptDetail => aptDetail.AptDetailsId == id).FirstOrDefault();
+                context.AptDetails.Remove(aptDetailToDelete);
                 context.SaveChanges();
                 return aptDetailToDelete;
             }
@@ -45,27 +60,6 @@ namespace Dal.Implementation
                 Debug.WriteLine(ex.ToString());
                 throw new Exception($"Error in deleting");
             }
-        }
-
-
-        public AptDetail GetById(int id)
-        {
-            try
-            {
-                return context.AptDetails.Where(AptDetail => AptDetail.AptDetailsId == id).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception($"Error");
-            }
-        }
-
-
-        public List<AptDetail> GetAll()
-        {
-            return context.AptDetails.ToList();
-            /*return context.AptDetails.ToList();*/
         }
 
 
@@ -89,11 +83,6 @@ namespace Dal.Implementation
         }
 
         AptDetail IAptDetailRepo.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public AptDetail Add(AptDetail owner)
         {
             throw new NotImplementedException();
         }
