@@ -24,6 +24,10 @@ namespace DataAccess
                 return connString;
             }
             string connStr = config.GetConnectionString(connStrNameInCnfig);
+            if (connStr == null)
+            {
+                throw new InvalidOperationException($"Connection string '{connStrNameInCnfig}' not found in configuration.");
+            }
             connStr = ReplaceWithCurrentLocation(connStr);
             return connStr;
         }
@@ -33,7 +37,7 @@ namespace DataAccess
             string str = AppDomain.CurrentDomain.BaseDirectory;
             string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
             string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
-            connStr = string.Format(connStr, twoDirectoriesAboveBin); //fail
+            connStr = string.Format(connStr, twoDirectoriesAboveBin);
             return connStr;
         }
     }

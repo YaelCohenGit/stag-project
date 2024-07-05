@@ -22,10 +22,21 @@ public class AptDetailsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<AptDetailsDTO?> GetAsync(int id)
+    public ActionResult<AptDetailsDTO> Get(int id)
     {
-        return await aptDetailsService.GetById(id);
+        return aptDetailsService.GetById(id);
     }
+
+
+    //[HttpGet("{ID}")]
+    //public ActionResult<ClientDTO> Get(string ID)
+    //{
+    //    return clientService.Get(ID);
+    //}
+
+
+
+
 
 
     //public string Read(BLAptDetails a)

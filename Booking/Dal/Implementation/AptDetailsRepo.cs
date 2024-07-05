@@ -17,7 +17,7 @@ namespace Dal.Implementation
         {
             return context.AptDetails.ToList();
         }
-        public AptDetail GetById(int id)
+        public AptDetail Get(int id)
         {
             try
             {
@@ -29,6 +29,7 @@ namespace Dal.Implementation
                 throw new Exception($"Error in getting single AptDetails {id} data");
             }
         }
+
 
 
         public AptDetail Add(AptDetail aptDetail)

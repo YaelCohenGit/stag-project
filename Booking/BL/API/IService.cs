@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BL.Models;
+using Dal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +19,6 @@ namespace BL.API
         Task<bool> UpdateAsync(T objectToUpdate);
 
         Task<bool> DeleteAsync(int id);
+
     }
 }

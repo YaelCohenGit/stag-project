@@ -41,6 +41,20 @@ namespace BL.BLImplementation
             return result;
         }
 
+        public AptDetailsDTO GetById(int id)
+        {
+            AptDetail c = aptDetails.Get(id);
+            if (c == null)
+            {
+                return null;
+            }
+            AptDetailsDTO client = new AptDetailsDTO(c.Country, c.City, c.Street, c.AptStyle, c.Beds, c.PricePerNight);
+            return client;
+        }
+
+
+
+
 
         //public async Task<AptDetailsDTO?> GetById(int id)
         //{
@@ -108,19 +122,13 @@ namespace BL.BLImplementation
             throw new NotImplementedException();
         }
 
-        Task<List<AptDetailsDTO>> IService<AptDetailsDTO>.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<AptDetailsDTO> GetSingleAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AptDetailsDTO?> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

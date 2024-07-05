@@ -10,10 +10,12 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
+#region
 //leah added also these usings:
 //using DAL.Implementation;
 //using DAL.API;
 //using Microsoft.Extensions.Configuration;
+#endregion
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,39 +37,24 @@ builder.Services.AddCors(options =>
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("AcademyDB");
 builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(connString));
-builder.Services.AddScoped<BLManager>();
+//builder.Services.AddScoped<BLManager>();
 builder.Services.AddScoped(b => new BLManager(connString));
-
-
-
-//builder.Services.AddServices();
-
-
-#region
-/*builder.Services.AddSwaggerGen();*/
-
-/*var provider = builder.Services.BuildServiceProvider();
-var configuration = provider.GetRequiredService<IConfiguration>();
-
-builder.Services.AddDbContext<DBContext>();*/
-#endregion
-//DBActions actions = new DBActions(builder.Configuration); 
-//var connString = actions.GetConnectionString("AcademyDB");
-//builder.Services.AddDbContext<DBContext>(opt => opt.UseSqlServer(connString));
-
 var app = builder.Build();
 
-/*if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}*/
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
 app.UseCors("CORSPolicy");
 app.MapGet("/", () => "Hello World!");
 app.MapControllers();
 
 app.Run();
+
+
+
 
 
 
