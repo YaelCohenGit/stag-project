@@ -10,12 +10,10 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-#region
 //leah added also these usings:
 //using DAL.Implementation;
 //using DAL.API;
 //using Microsoft.Extensions.Configuration;
-#endregion
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,22 +37,31 @@ var connString = actions.GetConnectionString("AcademyDB");
 builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(connString));
 //builder.Services.AddScoped<BLManager>();
 builder.Services.AddScoped(b => new BLManager(connString));
+
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+
+/*if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}*/
 
 app.UseCors("CORSPolicy");
 app.MapGet("/", () => "Hello World!");
-app.MapControllers();
 
 app.Run();
-
-
-
 
 
 

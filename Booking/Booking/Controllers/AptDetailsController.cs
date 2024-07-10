@@ -1,5 +1,4 @@
 ﻿using BL;
-using BL.API;
 using BL.BLImplementation;
 using BL.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,27 +21,21 @@ public class AptDetailsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<AptDetailsDTO> Get(int id)
+    public ActionResult<AptDetailsDTO?> Get(int id)
     {
-        return aptDetailsService.GetById(id);
+        return aptDetailsService.Get(id);
     }
 
+    [HttpPost]
+    public ActionResult<AptDetailsDTO> Add(AptDetailsDTO apt)
+    {
+        return aptDetailsService.Add(apt);
+    }
 
-    //[HttpGet("{ID}")]
-    //public ActionResult<ClientDTO> Get(string ID)
-    //{
-    //    return clientService.Get(ID);
-    //}
+    [HttpPut("{ID}")]
+    public ActionResult<AptDetailsDTO> Update(AptDetailsDTO apt)
+    {
+        return aptDetailsService.Update(apt);
+    }
 
-
-
-
-
-
-    //public string Read(BLAptDetails a)
-    //{
-    //    return a.Country + " " + a.City + " " + a.Street + " " + a.AptStyle + " " + a.Beds + " " + a.PricePerNight + " ";
-    //}
-
-    //String.Format("{0} {1} {2} {3} {4} {5} ", a.Country, a.City, a.Street, a.AptStyle, a.Beds, a.PricePerNight);
 }

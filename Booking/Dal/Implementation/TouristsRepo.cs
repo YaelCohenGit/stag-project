@@ -18,62 +18,15 @@ namespace Dal.Implementation
         {
             this.context = context;
         }
-
-        public Tourist Add(Tourist owner)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Tourist> AddAsync(Tourist entity)
-        {
-            try
-            {
-                context.Tourists.Add(entity);
-                context.SaveChanges();
-                return entity;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to add a new Tourist");
-            }
-        }
-
-        public Tourist Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Tourist> DeleteAsync(int id)
-        {
-            Tourist t = context.Tourists.FirstOrDefault(t => t.TouristId == id);
-            if (t != null)
-                context.Tourists.Remove(t);
-            context.SaveChanges();
-            return t;
-        }
-
         public List<Tourist> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Tourists.ToList();
         }
-
-        public Tourist GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async Task<PagedList<Tourist>> IRepository<Tourist>.GetAllAsync(BaseQueryParams queryParams)
-        //{
-        //    var queryable = context.Tourists.AsQueryable();
-        //    return PagedList<Tourist>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
-        //}
-
-        public async Task<Tourist> GetSingleAsync(int id)
+        public Tourist Get(int id)
         {
             try
             {
-                return await context.Tourists.Where(Tourist => Tourist.TouristId == id).FirstOrDefaultAsync();
+                return context.Tourists.Where(t => t.TouristId == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -82,21 +35,111 @@ namespace Dal.Implementation
             }
         }
 
-        public Tourist Update(Tourist owner)
+        public Tourist Add(Tourist aptDetail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                context.Tourists.Add(aptDetail);
+                context.SaveChanges();
+                return aptDetail;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to add a new Tourist");
+            }
+        }
+        public Tourist Delete(int id)
+        {
+            try
+            {
+                var aptDetailToDelete = context.Tourists.Where(t => t.TouristId == id).FirstOrDefault();
+                context.Tourists.Remove(aptDetailToDelete);
+                context.SaveChanges();
+                return aptDetailToDelete;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception($"Error in deleting a Tourist");
+            }
         }
 
-        public async Task<Tourist> UpdateAsync(int id, Tourist entity)
+        public Tourist Update(Tourist owner)
         {
-            Tourist? Tourist = context.Tourists.FirstOrDefault(c => c.TouristId == id);
-            if (Tourist != null)
+            foreach (Tourist c in context.Tourists.ToList())
             {
-                Tourist = entity;
-                context.SaveChanges();
+                if (c.TouristId == owner.TouristId)
+                {
+                    c.Tel = owner.Tel;
+                    c.Email = owner.Email;
+                    break;
+                }
             }
-            return Tourist;
+            context.SaveChanges();
+            return owner;
         }
+
+
+
+
+        //public async Task<Tourist> AddAsync(Tourist entity)
+        //{
+        //    try
+        //    {
+        //        context.Tourists.Add(entity);
+        //        context.SaveChanges();
+        //        return entity;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        throw new Exception("Failed to add a new Tourist");
+        //    }
+        //}
+
+
+
+        //public async Task<Tourist> DeleteAsync(int id)
+        //{
+        //    Tourist t = context.Tourists.FirstOrDefault(t => t.TouristId == id);
+        //    if (t != null)
+        //        context.Tourists.Remove(t);
+        //    context.SaveChanges();
+        //    return t;
+        //}
+
+
+        //public async Task<PagedList<Tourist>> IRepository<Tourist>.GetAllAsync(BaseQueryParams queryParams)
+        //{
+        //    var queryable = context.Tourists.AsQueryable();
+        //    return PagedList<Tourist>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
+        //}
+
+        //public async Task<Tourist> GetSingleAsync(int id)
+        //{
+        //    try
+        //    {
+        //        return await context.Tourists.Where(Tourist => Tourist.TouristId == id).FirstOrDefaultAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        throw new Exception($"Error in getting single Tourist {id} data");
+        //    }
+        //}
+
+
+        //public async Task<Tourist> UpdateAsync(int id, Tourist entity)
+        //{
+        //    Tourist? Tourist = context.Tourists.FirstOrDefault(c => c.TouristId == id);
+        //    if (Tourist != null)
+        //    {
+        //        Tourist = entity;
+        //        context.SaveChanges();
+        //    }
+        //    return Tourist;
+        //}
 
 
     }
