@@ -17,19 +17,18 @@ namespace BL.BLImplementation
         {
             this.aptDetails = manager.AptDetail;
         }
-        public AptDetailsDTO Add(AptDetailsDTO client)
+        public AptDetailsDTO Add(AptDetailsDTO apt)
         {
             AptDetail c = new AptDetail();
-            c.Country = client.country;
-            c.City = client.city;
-            c.Street = client.street;
-            c.AptStyle= client.aptStyle;
-            c.Beds = client.beds;
-            c.PricePerNight = client.pricePerNight;
+            c.Country = apt.country;
+            c.City = apt.city;
+            c.Street = apt.street;
+            c.AptStyle= apt.aptStyle;
+            c.Beds = apt.beds;
+            c.PricePerNight = apt.pricePerNight;
             aptDetails.Add(c);
-            return client;
+            return apt;
         }
-
         public List<AptDetailsDTO> GetAll()
         {
             List<AptDetail> list = aptDetails.GetAll();
@@ -41,86 +40,28 @@ namespace BL.BLImplementation
             return result;
         }
 
-
-        //public async Task<AptDetailsDTO?> GetById(int id)
-        //{
-        //    //Task<AptDetails> user = _aptDetailRepo.GetSingleAsync(id);
-        //    //AptDetailRepo newAptDetailRepo = new AptDetailRepo();
-
-        //    return _mapper?.Map<AptDetailsDTO>( _aptDetailRepo.GetById(id));
-        //}
-
-        //public async Task<FlightDTO> GetSingleAsync(string flightCode)
-        //{
-        //    return _mapper.Map<FlightDTO>(await _flightRepo.GetSingleAsync(flightCode));
-        //}
-
-        //public UserBl GetById(int id)
-        //{
-        //    Task<User> user = users.GetSingleAsync(id);
-        //    UserBl newUser = new UserBl();
-        //    newUser.Name = user.Result.Name;
-        //    newUser.Email = user.Result.Email;
-        //    newUser.Password = user.Result.Password;
-        //    return newUser;
-        //}
-        //public static BLAptDetails ToDto(AptDetails employee)
-        //{
-        //    if (employee != null)
-        //    {
-        //        return new BLAptDetails
-        //        {
-        //            country = employee.Country,
-        //            city = employee.City,
-        //            street = employee.Street,
-        //            aptStyle = employee.AptStyle,
-        //            beds = employee.Beds,
-        //            pricePerNight = employee.PricePerNight,
-        //        };
-        //    }
-
-        //    return null;
-        //}
-
-        public async Task<AptDetailsDTO> AddAsync(AptDetailsDTO objectToUpdate)
+        public AptDetailsDTO Get(int id)
         {
-            throw new NotImplementedException();
-            // return await _aptDetailRepo.AddAsync(Convertion.SimpleAutoMapper<AptDetails, BLAptDetails>(objectToUpdate));
+            AptDetail c = aptDetails.Get(id);
+            if (c == null)
+            {
+                return null;
+            }
+            AptDetailsDTO apt = new AptDetailsDTO(c.Country, c.City, c.Street, c.AptStyle, c.Beds, c.PricePerNight);
+            return apt;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public AptDetailsDTO Update(AptDetailsDTO apt)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AptDetail>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateAsync(AptDetail objectToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateAsync(AptDetailsDTO objectToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<AptDetailsDTO>> IService<AptDetailsDTO>.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AptDetailsDTO> GetSingleAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AptDetailsDTO?> GetById(int id)
-        {
-            throw new NotImplementedException();
+            AptDetail c = new();
+            c.Country = apt.country;
+            c.City = apt.city;
+            c.Street = apt.street;
+            c.AptStyle = apt.aptStyle;
+            c.Beds = apt.beds;
+            c.PricePerNight = apt.pricePerNight;
+            aptDetails.Update(c);
+            return apt;
         }
     }
 }

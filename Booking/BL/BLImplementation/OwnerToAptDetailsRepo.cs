@@ -43,16 +43,16 @@ namespace BL.BLImplementation
         //    return OwnersList;
         //}
 
-        public Owner GetById(int id)
-        {
-            Owner owner = ownersRepo.GetById(id);
-            Owner newOwner = new Owner();
+        //public Owner GetById(int id)
+        //{
+            //Owner owner = ownersRepo.Get(id);
+            //Owner newOwner = new Owner();
             //newOwner.FirstName = Owner.Result.Name.Split(' ')[0];
             //newOwner.LastName = Owner.Result.Name.Split(" ")[1];
             //newOwner.Email = Owner.Result.Email;
             //newOwner.Password = Owner.Result.Password;
-            return owner;
-        }
+            //return owner;
+        //}
 
     }
 }

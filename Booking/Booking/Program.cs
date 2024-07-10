@@ -35,27 +35,22 @@ builder.Services.AddCors(options =>
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("AcademyDB");
 builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(connString));
-builder.Services.AddScoped<BLManager>();
+//builder.Services.AddScoped<BLManager>();
 builder.Services.AddScoped(b => new BLManager(connString));
 
-
-
-//builder.Services.AddServices();
-
-
-#region
-/*builder.Services.AddSwaggerGen();*/
-
-/*var provider = builder.Services.BuildServiceProvider();
-var configuration = provider.GetRequiredService<IConfiguration>();
-
-builder.Services.AddDbContext<DBContext>();*/
-#endregion
-//DBActions actions = new DBActions(builder.Configuration); 
-//var connString = actions.GetConnectionString("AcademyDB");
-//builder.Services.AddDbContext<DBContext>(opt => opt.UseSqlServer(connString));
-
 var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
 
 /*if (app.Environment.IsDevelopment())
 {
@@ -65,7 +60,6 @@ var app = builder.Build();
 
 app.UseCors("CORSPolicy");
 app.MapGet("/", () => "Hello World!");
-app.MapControllers();
 
 app.Run();
 

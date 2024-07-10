@@ -3,3 +3,6 @@
 Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\כהן יעל\Desktop\The project\stag-project\Booking\Dal\DB\Database1.mdf";Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context AcademyContext -OutputDir Models  -Force -NoOnConfiguring
 Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=H:\finalProject\Booking\Dal\Database1.mdf;Integrated Security=True;Connect Timeout=30
 
+The path of the project in Yaeli's house:
+E:\\יעלי\\כיתה ו\\cloned project\\stag-project\\Booking\\DB\\Database1.mdf
+

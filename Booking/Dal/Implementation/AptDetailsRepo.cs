@@ -17,7 +17,7 @@ namespace Dal.Implementation
         {
             return context.AptDetails.ToList();
         }
-        public AptDetail GetById(int id)
+        public AptDetail Get(int id)
         {
             try
             {
@@ -29,7 +29,6 @@ namespace Dal.Implementation
                 throw new Exception($"Error in getting single AptDetails {id} data");
             }
         }
-
 
         public AptDetail Add(AptDetail aptDetail)
         {
@@ -45,7 +44,6 @@ namespace Dal.Implementation
                 throw new Exception("Failed to add a new AptDetail");
             }
         }
-
         public AptDetail Delete(int id)
         {
             try
@@ -62,14 +60,14 @@ namespace Dal.Implementation
             }
         }
 
-
-        public Owner Update(Owner owner)
+        public AptDetail Update(AptDetail owner)
         {
-            foreach (Owner o in context.Owners.ToList())
+            foreach (AptDetail c in context.AptDetails.ToList())
             {
-                if (o.OwnerId == owner.OwnerId)
+                if (c.AptDetailsId == owner.AptDetailsId)
                 {
-                    o.Tel = owner.Tel;
+                    c.AptStyle = owner.AptStyle;
+                    c.Beds = owner.Beds;
                     break;
                 }
             }
@@ -77,27 +75,19 @@ namespace Dal.Implementation
             return owner;
         }
 
-        List<AptDetail> IAptDetailRepo.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        AptDetail IAptDetailRepo.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public AptDetail Update(AptDetail owner)
-        {
-            throw new NotImplementedException();
-        }
-
-        AptDetail IAptDetailRepo.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-
+        //public Owner Update(Owner owner)
+        //{
+        //    foreach (Owner o in context.Owners.ToList())
+        //    {
+        //        if (o.OwnerId == owner.OwnerId)
+        //        {
+        //            o.Tel = owner.Tel;
+        //            break;
+        //        }
+        //    }
+        //    context.SaveChanges();
+        //    return owner;
+        //}
 
 
         //DBContext context;
@@ -121,28 +111,6 @@ namespace Dal.Implementation
         //    }
         //}
 
-        ////public async Task<PagedList<AptDetails>> GetAllAsync(BaseQueryParams queryParams)
-        ////{
-        ////    var queryable = context.AptDetails.AsQueryable();
-        ////    return PagedList<AptDetails>.ToPagedList(queryable, queryParams.PageNumber, queryParams.PageSize);
-        ////}
-        //public async Task<AptDetails> GetSingleAsync(int id)
-        //{
-        //    AptDetails? returnValue = null;
-
-        //    try
-        //    {
-        //        //return new AptDetails("1","2","3","4","5","6");
-        //        returnValue = await context.AptDetails.Where(AptDetails => AptDetails.AptDetailsId == id).FirstOrDefaultAsync();              
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.ToString());
-        //        throw new Exception($"Error in getting single AptDetails {id} data");
-        //    }
-
-        //    return returnValue;
-        //}
 
 
         //public async Task<AptDetails> DeleteAsync(int id)

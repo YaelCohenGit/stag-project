@@ -11,7 +11,7 @@ namespace BL.API
 {
     public interface IAptDetailsService : IService<AptDetailsDTO>
     {
-        public Task<AptDetailsDTO?> GetById(int id);
+        public AptDetailsDTO Get(int id);
 
     }
 }
