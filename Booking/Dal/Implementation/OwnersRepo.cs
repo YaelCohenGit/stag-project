@@ -30,7 +30,6 @@ namespace Dal.Implementation
                 throw new Exception("Failed to add a new Owner");
             }
         }
-
         public Owner Delete(int id)
         {
             try
@@ -46,9 +45,7 @@ namespace Dal.Implementation
                 throw new Exception($"Error in deleting owner {id} data");
             }
         }
-
-
-        public Owner GetById(int id)
+        public Owner Get(int id)
         {
             try
             {
@@ -60,13 +57,10 @@ namespace Dal.Implementation
                 throw new Exception($"Error in getting single Gown {id} data");
             }
         }
-
         public List<Owner> GetAll()
         {
             return context.Owners.ToList();
         }
-
-
         public Owner Update(Owner owner)
         {
             foreach (Owner o in context.Owners.ToList())

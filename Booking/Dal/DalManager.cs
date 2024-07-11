@@ -11,23 +11,23 @@ namespace Dal
         public OwnersRepo Owners { get; }
         public AptDetailsRepo AptDetail { get; }
         public TouristsRepo Tourists { get; }
+        public WantedAptsRepo WantedApts { get; }
         public DalManager(string connString)
         {
-            // כאן הגדרנו אוסף של מחלקות שרות
             ServiceCollection services = new();
-            // מוסיפים לאוסף אוביקטים
             services.AddDbContext<DBContext>((op => op.UseSqlServer(connString)));
 
             services.AddScoped<IOwnersRepo, OwnersRepo>();
             services.AddScoped<IAptDetailRepo, AptDetailsRepo>();
             services.AddScoped<ITouristsRepo, TouristsRepo>();
+            services.AddScoped<IWantedAptsRepo, WantedAptsRepo>();
 
-            // הגדרת מנהל למחלקות השרות שנקרא פרווידר
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             AptDetail = (AptDetailsRepo)serviceProvider.GetRequiredService<IAptDetailRepo>();
             Tourists = (TouristsRepo)serviceProvider.GetRequiredService<ITouristsRepo>();
             Owners = (OwnersRepo)serviceProvider.GetRequiredService<IOwnersRepo>();
+            WantedApts = (WantedAptsRepo)serviceProvider.GetRequiredService<IWantedAptsRepo>();
         }
     }
 }

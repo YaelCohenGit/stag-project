@@ -11,7 +11,10 @@ namespace BL.API
 {
     public interface IAptDetailsService : IService<AptDetailsDTO>
     {
+        public AptDetailsDTO Add(AptDetailsDTO apt);
+        public List<AptDetailsDTO> GetAll();
         public AptDetailsDTO Get(int id);
+        public AptDetailsDTO Update(AptDetailsDTO apt);
 
     }
 }

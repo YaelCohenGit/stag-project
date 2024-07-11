@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class DBActions 
+    public class DBActions
     {
         static string connString;
         IConfiguration config;

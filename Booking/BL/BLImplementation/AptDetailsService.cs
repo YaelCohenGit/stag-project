@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BL.API;
+﻿using BL.API;
 using BL.Models;
 using Dal;
 using Dal.API;
@@ -23,7 +22,7 @@ namespace BL.BLImplementation
             c.Country = apt.country;
             c.City = apt.city;
             c.Street = apt.street;
-            c.AptStyle= apt.aptStyle;
+            c.AptStyle = apt.aptStyle;
             c.Beds = apt.beds;
             c.PricePerNight = apt.pricePerNight;
             aptDetails.Add(c);
@@ -39,7 +38,6 @@ namespace BL.BLImplementation
             }
             return result;
         }
-
         public AptDetailsDTO Get(int id)
         {
             AptDetail c = aptDetails.Get(id);
@@ -50,7 +48,6 @@ namespace BL.BLImplementation
             AptDetailsDTO apt = new AptDetailsDTO(c.Country, c.City, c.Street, c.AptStyle, c.Beds, c.PricePerNight);
             return apt;
         }
-
         public AptDetailsDTO Update(AptDetailsDTO apt)
         {
             AptDetail c = new();

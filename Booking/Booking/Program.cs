@@ -5,8 +5,6 @@ using Dal;
 using Dal.Models;
 using DataAccess;
 
-//using DataAccess;
-//using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -35,7 +33,6 @@ builder.Services.AddCors(options =>
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("AcademyDB");
 builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(connString));
-//builder.Services.AddScoped<BLManager>();
 builder.Services.AddScoped(b => new BLManager(connString));
 
 var app = builder.Build();
@@ -50,7 +47,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 
 /*if (app.Environment.IsDevelopment())
 {

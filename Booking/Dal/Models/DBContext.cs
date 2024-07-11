@@ -6,21 +6,18 @@ namespace Dal.Models;
 
 public partial class DBContext : DbContext
 {
-    public DBContext()
-    {
-        
-    }
+    public DBContext() { }
     public DBContext(DbContextOptions<DBContext> options)
         : base(options)
     {
     }
-    public  DbSet<AptDetail> AptDetails { get; set; }
+    public DbSet<AptDetail> AptDetails { get; set; }
 
-    public  DbSet<Owner> Owners { get; set; }
+    public DbSet<Owner> Owners { get; set; }
 
-    public  DbSet<Tourist> Tourists { get; set; }
+    public DbSet<Tourist> Tourists { get; set; }
 
-    public  DbSet<WantedApt> WantedApts { get; set; }
+    public DbSet<WantedApt> WantedApts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

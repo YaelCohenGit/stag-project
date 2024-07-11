@@ -1,4 +1,7 @@
-﻿using BL.API;
+﻿using BL;
+using BL.API;
+using BL.BLImplementation;
+using BL.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.Controllers;
@@ -7,44 +10,33 @@ namespace Booking.Controllers;
 [ApiController]
 public class WantedAptsController : ControllerBase
 {
-    IWantedAptsService wantedAptsService;
-    public WantedAptsController(IWantedAptsService wantedAptsService)
+    WantedAptsService WantedApts;
+    public WantedAptsController(BLManager blManager)
     {
-        this.wantedAptsService = wantedAptsService;
+        this.WantedApts = blManager.WantedAptService;
     }
 
+    [HttpGet]
+    public ActionResult<List<WantedAptsDTO>> GetAll()
+    {
+        return WantedApts.GetAll();
+    }
 
+    [HttpGet("{id}")]
+    public ActionResult<WantedAptsDTO?> Get(int id)
+    {
+        return WantedApts.Get(id);
+    }
 
+    [HttpPost]
+    public ActionResult<WantedAptsDTO> Add(WantedAptsDTO apt)
+    {
+        return WantedApts.Add(apt);
+    }
 
-
-
-
-    //[HttpGet("getAllEmployees")]
-    //public List<WantedApt> Get()
-    //{
-    //    return WantedAptsService.GetAllEmployees();
-    //}
-
-    //[HttpGet("employeeId/{employeeId}")]
-    //public Employees GetById(int employeeId)
-    //{
-    //    return WantedAptsService.GetById(employeeId);
-    //}
-
-    //[HttpGet("checkIdAndName/{id}/{fullName}")]
-    //public int checkIdAndName(int id, string fullName)
-    //{
-    //    return WantedAptsService.checkIdAndName(id, fullName);
-    //}
-
-    //[HttpPost("addEmployee")]
-    //public int AddEmployee(WantedApt wa)
-    //{
-    //    return WantedAptsService.AddEmployee(wa);
-    //}
-    //[HttpGet("getByCode/{code}")]
-    //public WantedApt GetByCode(int code)
-    //{
-    //    return WantedAptsService.GetByCode(code);
-    //}
+    [HttpPut("{ID}")]
+    public ActionResult<WantedAptsDTO> Update(WantedAptsDTO apt)
+    {
+        return WantedApts.Update(apt);
+    }
 }

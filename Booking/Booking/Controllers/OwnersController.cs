@@ -1,4 +1,7 @@
-﻿using Dal.Models;
+﻿using BL.BLImplementation;
+using BL.DTO;
+using BL;
+using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.Controllers
@@ -7,26 +10,36 @@ namespace Booking.Controllers
     [ApiController]
     public class OwnersController : ControllerBase
     {
-        
-        public void Create(string? Tel, string? Email, int AptDetail)
+        OwnerService ownerService;
+        public OwnersController(BLManager blManager)
         {
-            Owner o = new Owner() { Tel = Tel, Email = Email, AptDetailsId = AptDetail };
-            
-        }
-        public void Updete(Owner owner, string? Tel, string? Email)
-        {
-            owner.Email = Email;
-            owner.Tel = Tel;
+            this.ownerService = blManager.OwnersService;
         }
 
-        //public void Delete(Owner t)
-        //{
-
-        //}
-
-        public string Read(Owner O)
+        [HttpGet]
+        public ActionResult<List<OwnerDTO>> GetAll()
         {
-            return O.Tel + " " + O.Email;
+            return ownerService.GetAll();
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<OwnerDTO?> Get(int id)
+        {
+            return ownerService.Get(id);
+        }
+
+        [HttpPost]
+        public ActionResult<OwnerDTO> Add(OwnerDTO apt)
+        {
+            return ownerService.Add(apt);
+        }
+
+        [HttpPut("{ID}")]
+        public ActionResult<OwnerDTO> Update(OwnerDTO apt)
+        {
+            return ownerService.Update(apt);
+        }
+
+
     }
 }

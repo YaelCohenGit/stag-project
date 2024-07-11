@@ -10,8 +10,6 @@ namespace BL.Models
     public class AptDetailsDTO
     {
         [JsonConstructor]
-        public AptDetailsDTO() {}
-
         public AptDetailsDTO(string country, string city, string street, string aptStyle, string beds, string pricePerNight)
         {
             this.country = country;

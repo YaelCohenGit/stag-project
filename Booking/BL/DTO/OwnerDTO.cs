@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace BL.DTO
 {
-    public class TouristDTO
+    public class OwnerDTO
     {
         [JsonConstructor]
-        public TouristDTO() { }
-        public TouristDTO(string tel, string email)
+        public OwnerDTO() { }
+        public OwnerDTO(string tel, string email)
         {
             this.Tel = tel;
             this.Email = email;
-
         }
         public string? TouristId { get; set; }
         public string? Tel { get; set; }

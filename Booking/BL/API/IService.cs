@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,9 @@ namespace BL.API
         //Task<bool> UpdateAsync(T objectToUpdate);
 
         //Task<bool> DeleteAsync(int id);
+        T Add(T a);
+        List<T> GetAll();
+        T Get(int id);
+        T Update(T a);
     }
 }

@@ -34,7 +34,6 @@ namespace Dal.Implementation
                 throw new Exception($"Error in getting single Tourist {id} data");
             }
         }
-
         public Tourist Add(Tourist aptDetail)
         {
             try
@@ -64,7 +63,6 @@ namespace Dal.Implementation
                 throw new Exception($"Error in deleting a Tourist");
             }
         }
-
         public Tourist Update(Tourist owner)
         {
             foreach (Tourist c in context.Tourists.ToList())
