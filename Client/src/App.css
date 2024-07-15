@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,56 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.app {
+  padding: 20px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card p {
+  margin: 5px 0;
+}
+.floating-buttons {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px; /* Higher value for more ellipse-like shape */
+  width: 100px; /* Width for ellipse */
+  height: 50px; /* Height for ellipse */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.floating-button:hover {
+  background-color: #0056b3;
 }
