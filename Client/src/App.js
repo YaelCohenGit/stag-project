@@ -4,6 +4,7 @@ import './App.css';
 import AptDetailsComponent from './airbnb/displayApartments';
 import Welcome from './airbnb/welcome';
 import AddApartment from './airbnb/addApartment';
+import axios from 'axios';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/all-apartments" element={<AptDetailsComponent />} />
             <Route path="/" element={<Welcome />} />
           </Routes>
+          <Welcome/>
         </header>
       </div>
     </Router>
